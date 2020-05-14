@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Все путевки </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Дата</th>
+      <th>Страна</th>
+      <th>Колличество дней</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%=link_to post.name,post_path(post) %></td>
+        <td><%= post.date %></td>
+        <td><%= post.country %></td>
+ 
+        <td><%= post.count_night %></td>
+        
+      </tr>
+   <% if user_signed_in? %>
+           
+              <% if current_user.roll=="admin" %>
+      <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      
+        <% end %>
+        <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

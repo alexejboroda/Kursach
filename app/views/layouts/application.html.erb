@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LexaOop</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+ <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'%>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <nav class="site-header sticky-top py-1">
+  <div class="container d-flex flex-column flex-md-row justify-content-between">
+   <%=link_to "Главная ",posts_path%>
+  
+          <% if user_signed_in? %>
+           
+              <% if current_user.roll=="admin" %>
+            <%=link_to "Добавить путевку" , new_post_path,class:"text-dark"%>
+               
+          
+        
+              <%= link_to "Все пользователи",users_page_index_path,class:"text-dark"%>
+          
+          <%end%>
+            <%=link_to current_user.email , users_page_path(current_user),class:"text-dark"%>
+           
+ 
+           <div class="registration_navbar">
+              
+           </div>
+        
+            <%=link_to "Выйти" ,destroy_user_session_path ,method: :delete,class:"text-dark"%>
+
+          <%else%>
+         
+           <div class="registration_navbar">
+            
+           </div>
+           
+            <%=link_to "Войти" ,new_user_session_path,class:"text-dark"%>
+
+          <% end %>
+  </div>
+</nav>
+<hr>
+<div class="container">
+    <%= yield %>
+    </div>
+  </body>
+</html>
